@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
+import { DB_URL } from "./config.js";
 
 export const connectDB = async () => {
   try {
-    mongoose.connect(
-      "mongodb+srv://pomodoro:1one2two@auth.nku4meh.mongodb.net/"
-    );
+    mongoose.connect(DB_URL);
     console.log("→ DB connected");
   } catch (error) {
     console.log(error);

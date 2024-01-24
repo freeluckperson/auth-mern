@@ -30,7 +30,8 @@ export const login = async (req, res) => {
     const userFounf = await User.findOne({ email });
     if (!userFounf) return res.status(400).json({ message: "User not found" });
     const isMatch = await bcrypt.compare(password, userFounf.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     jwt.sign(
       { id: userFounf._id },
@@ -44,4 +45,8 @@ export const login = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+};
+
+export const logout = (req, res) => {
+  res.cookie("cookie", "", { expiresIn: new Date(0) }).sendStatus(200);
 };
