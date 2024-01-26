@@ -15,6 +15,7 @@ router.post("/logout", logout);
 
 router.post("/register", register);
 
+//a cada ruta que quiera proteger debo colocar authRequired
 router.get("/profile", authRequired, profile);
 
 export default router;

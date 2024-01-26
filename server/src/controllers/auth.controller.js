@@ -13,7 +13,7 @@ export const register = async (req, res) => {
     jwt.sign(
       { id: newUser._id },
       TOKEN_SECRET,
-      { expiresIn: "1d" },
+      { expiresIn: "1h" },
       (error, token) => {
         if (error) console.log(error);
         res.status(200).cookie("token", token).json(newUser);
@@ -36,7 +36,7 @@ export const login = async (req, res) => {
     jwt.sign(
       { id: userFounf._id },
       TOKEN_SECRET,
-      { expiresIn: "1d" },
+      { expiresIn: "1h" },
       (error, token) => {
         if (error) console.log(error);
         res.status(200).cookie("token", token).json(userFounf);
@@ -48,7 +48,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.cookie("cookie", "", { expiresIn: new Date(0) }).sendStatus(200);
+  res.clearCookie("token").sendStatus(200);
 };
 
 export const profile = async (req, res) => {
