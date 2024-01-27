@@ -9,13 +9,13 @@ import { authRequired } from "../middlewares/validateToken.js";
 
 const router = Router();
 
+//a cada ruta que quiera proteger debo colocar authRequired
+router.get("/profile", authRequired, profile);
+
 router.post("/login", login);
 
 router.post("/logout", logout);
 
 router.post("/register", register);
-
-//a cada ruta que quiera proteger debo colocar authRequired
-router.get("/profile", authRequired, profile);
 
 export default router;
