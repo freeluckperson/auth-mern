@@ -27,19 +27,19 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userFounf = await User.findOne({ email });
-    if (!userFounf) return res.status(400).json({ message: "User not found" });
-    const isMatch = await bcrypt.compare(password, userFounf.password);
+    const userFound = await User.findOne({ email });
+    if (!userFound) return res.status(400).json({ message: "User not found" });
+    const isMatch = await bcrypt.compare(password, userFound.password);
     if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
 
     jwt.sign(
-      { id: userFounf._id },
+      { id: userFound._id },
       TOKEN_SECRET,
       { expiresIn: "1h" },
       (error, token) => {
         if (error) console.log(error);
-        res.status(200).cookie("token", token).json(userFounf);
+        res.status(200).cookie("token", token).json(userFound);
       }
     );
   } catch (error) {
