@@ -4,15 +4,20 @@ const taskSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     completed: {
       type: Boolean,
       default: false,
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
     },
   },
   { timestamps: true }
