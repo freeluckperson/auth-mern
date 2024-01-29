@@ -17,13 +17,6 @@ export const createTask = async (req, res) => {
   try {
     const { title, description, completed } = req.body;
 
-    if (
-      typeof title !== "string" ||
-      typeof description !== "string" ||
-      typeof completed !== "boolean"
-    )
-      return res.status(400).json("Invalid data types");
-
     const newTask = new Task({
       title,
       description,
