@@ -6,6 +6,10 @@ import { TOKEN_SECRET } from "../config.js";
 export const register = async (req, res) => {
   try {
     const { email, password, userName } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json(["Email already exist"]);
+
     const passwordHash = await bcrypt.hash(password, 10);
     const newUser = new User({ email, password: passwordHash, userName });
     await newUser.save();
