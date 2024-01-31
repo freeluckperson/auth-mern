@@ -1,62 +1,49 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { registerRequest } from "../../api/auth";
 
 const Register = () => {
-  const [register, setRegister] = useState({
-    userName: "",
-    email: "",
-    password: "",
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit(async (value) => {
+    const res = await registerRequest(value);
+    console.log(res);
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetch("http://localhost:3000/api/register")
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch();
-  };
-
   return (
-    <div className="p-5">
-      <form onSubmit={handleSubmit} className="container mt-5 w-25 ">
-        <h2 className="text-center">Register</h2>
-        <div className="mb-3">
+    <div className="container-fluid text-center ">
+      <form onSubmit={onSubmit}>
+        <h2 className="mt-5 ">Register</h2>
+
+        <div className="mb-2 ">
           <input
+            className="form-control-lg bg-white "
             type="text"
-            className="form-control"
+            {...register("userName", { required: true })}
             placeholder="Enter a username"
-            value={register.userName}
-            onChange={(event) =>
-              setRegister({ ...register, userName: event.target.value })
-            }
           />
         </div>
-        <div className="mb-3">
+
+        <div className="mb-2">
           <input
+            className="form-control-lg bg-white "
             type="email"
-            className="form-control  "
-            placeholder="Enter a email"
-            value={register.email}
-            onChange={(event) =>
-              setRegister({ ...register, email: event.target.value })
-            }
+            {...register("email", { required: true })}
+            placeholder="Enter an email"
           />
         </div>
-        <div className="mb-3">
+
+        <div>
           <input
+            className="form-control-lg bg-white "
             type="password"
-            className="form-control"
+            {...register("password", { required: true })}
             placeholder="Enter a password"
-            value={register.password}
-            onChange={(event) =>
-              setRegister({ ...register, password: event.target.value })
-            }
           />
         </div>
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary ">
-            Submit
-          </button>
-        </div>
+
+        <button type="submit" className="btn btn-outline-dark mt-2">
+          Register
+        </button>
       </form>
     </div>
   );

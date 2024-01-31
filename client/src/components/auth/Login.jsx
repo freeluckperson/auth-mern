@@ -1,43 +1,37 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { loginRequest } from "../../api/auth";
 
 const Login = () => {
-  const [login, setLogin] = useState({ email: "", password: "" });
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  const onSubmit = handleSubmit(async (value) => {
+    const res = await loginRequest(value);
+    console.log(res);
+  });
 
   return (
-    <div className="p-5">
-      <form onSubmit={handleSubmit} className="container mt-5 w-25 ">
-        <div className="mb-3">
-          <h2 className="text-center">LOGIN</h2>
+    <div className="container-fluid text-center ">
+      <form onSubmit={onSubmit} className="">
+        <h2 className="mt-5">Login</h2>
+        <div className="mb-2">
           <input
+            className="form-control-lg bg-white"
             type="email"
-            className="form-control  "
-            placeholder="Enter a email"
-            value={login.email}
-            onChange={(event) =>
-              setLogin({ ...login, email: event.target.value })
-            }
+            placeholder="Enter an email"
+            {...register("email", { required: true })}
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-2">
           <input
+            className="form-control-lg bg-white"
             type="password"
-            className="form-control"
             placeholder="Enter a password"
-            value={login.password}
-            onChange={(event) =>
-              setLogin({ ...login, password: event.target.value })
-            }
+            {...register("password", { required: true })}
           />
         </div>
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary ">
-            Submit
-          </button>
-        </div>
+        <button className="btn btn-outline-dark " type="submit">
+          Sing in
+        </button>
       </form>
     </div>
   );
