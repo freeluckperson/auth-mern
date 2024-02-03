@@ -1,7 +1,7 @@
 //Usamos context para almacenar el usuario en un estado
 
 import { createContext, useContext, useState } from "react";
-import { registerRequest } from "../api/auth";
+import { loginRequest, registerRequest } from "../api/auth";
 
 export const AuthContext = createContext();
 
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setuser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [registerErr, setRegisterErr] = useState(null);
+  const [loginErr, setLoginErr] = useState(null);
 
   const signup = async (user) => {
     try {
@@ -26,13 +27,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signin = async (user) => {
+    try {
+      const res = await loginRequest(user);
+      console.log(res);
+    } catch (error) {
+      setLoginErr([error.response.data]);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         signup,
+        signin,
         user,
         isAuthenticated,
         registerErr,
+        loginErr,
       }}
     >
       {children}
