@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -12,7 +12,6 @@ const Register = () => {
 
   const { signup, isAuthenticated, registerErr } = useAuth();
   const navigate = useNavigate();
-  console.log(registerErr);
 
   useEffect(() => {
     if (isAuthenticated) navigate("/");
@@ -24,13 +23,11 @@ const Register = () => {
 
   return (
     <div className="text-center ">
-      <div className="d-flex justify-content-center ">
-        {registerErr?.map((err, i) => (
-          <p className="form-control-lg  w-50 bg-danger " key={i}>
-            {err}
-          </p>
-        ))}
-      </div>
+      {registerErr?.map((err, i) => (
+        <label className="form-form-control-sm  bg-danger " key={i}>
+          {err}
+        </label>
+      ))}
       <form onSubmit={onSubmit}>
         <h2 className="mt-5 ">Register</h2>
         <div className="mb-2 ">
@@ -68,7 +65,9 @@ const Register = () => {
             <p className="text-decoration-underline">Password is required</p>
           )}
         </div>
-
+        <p>
+          You already have an account? click <Link to="/login">Here</Link>
+        </p>
         <button type="submit" className="btn btn-outline-dark mt-2">
           Register
         </button>
