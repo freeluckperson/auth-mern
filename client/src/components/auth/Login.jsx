@@ -13,7 +13,7 @@ const Login = () => {
 
   const onSubmit = handleSubmit(async (value) => {
     const response = await signin(value);
-    console.log(response);
+    if (response) console.log(response);
   });
 
   return (
@@ -52,7 +52,7 @@ const Login = () => {
           Do not have a account? click <Link to="/register">Here</Link>
         </p>
         <button type="submit" className="btn btn-outline-dark mt-2">
-          Register
+          Login
         </button>
       </form>
     </div>

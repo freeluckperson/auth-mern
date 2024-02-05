@@ -61,3 +61,16 @@ export const profile = async (req, res) => {
   if (!userFound) return res.status(400).json({ message: "User not found" });
   return res.status(200).json(userFound);
 };
+
+export const verifyToken = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) return res.status(400).json({ message: "Without authorization" });
+
+  jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+    if (err) return res.status(400).json({ message: "Without authorization" });
+
+    const userFound = await User.findById(user.id);
+    if (!userFound) return res.status(400).json({ message: "User not exist" });
+    return res.status(201).json(userFound);
+  });
+};
