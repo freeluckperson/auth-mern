@@ -22,7 +22,7 @@ const Register = () => {
   });
 
   return (
-    <div className="text-center ">
+    <div className="container text-center " style={{ maxWidth: "360px" }}>
       {registerErr?.map((err, i) => (
         <label className="form-form-control-sm  bg-danger " key={i}>
           {err}
@@ -32,7 +32,7 @@ const Register = () => {
         <h2 className="mt-5 ">Register</h2>
         <div className="mb-2 ">
           <input
-            className="form-control-lg bg-white "
+            className="form-control"
             type="text"
             {...register("userName", { required: true })}
             placeholder="Enter a username"
@@ -44,7 +44,7 @@ const Register = () => {
 
         <div className="mb-2">
           <input
-            className="form-control-lg bg-white "
+            className="form-control"
             type="email"
             {...register("email", { required: true })}
             placeholder="Enter an email"
@@ -56,7 +56,7 @@ const Register = () => {
 
         <div>
           <input
-            className="form-control-lg bg-white "
+            className="form-control"
             type="password"
             {...register("password", { required: true })}
             placeholder="Enter a password"

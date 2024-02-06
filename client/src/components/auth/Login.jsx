@@ -1,25 +1,33 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { signin, loginErr } = useAuth();
+  const { signin, loginErr, isAuthenticated } = useAuth();
+  console.log(loginErr);
 
   const onSubmit = handleSubmit(async (value) => {
     const response = await signin(value);
     if (response) console.log(response);
   });
 
+  useEffect(() => {
+    if (isAuthenticated) navigate("/tasks");
+  }, [isAuthenticated, navigate]);
+
   return (
-    <div className="text-center ">
+    <div className="container text-center " style={{ maxWidth: "360px" }}>
       {loginErr?.map((err, i) => (
-        <label className="form-control-sm  bg-danger " key={i}>
+        <label className="form-control " key={i}>
           {err}
         </label>
       ))}
@@ -27,7 +35,7 @@ const Login = () => {
         <h2 className="mt-5  ">Login</h2>
         <div className="mb-2">
           <input
-            className="form-control-lg bg-white "
+            className="form-control"
             type="email"
             {...register("email", { required: true })}
             placeholder="Enter an email"
@@ -39,7 +47,7 @@ const Login = () => {
 
         <div>
           <input
-            className="form-control-lg bg-white "
+            className="form-control"
             type="password"
             {...register("password", { required: true })}
             placeholder="Enter a password"
