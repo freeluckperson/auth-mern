@@ -6,6 +6,16 @@ import Profile from "./Profile";
 import TaskForm from "./TaskForm";
 import Tasks from "./Tasks";
 import ProtectedRoutes from "../ProtectedRoutes";
+import NavBar from "./NavBar";
 
-
-export { Login, Register, Logout, Home, Profile, TaskForm, Tasks, ProtectedRoutes };
+export {
+  Login,
+  Register,
+  Logout,
+  Home,
+  Profile,
+  TaskForm,
+  Tasks,
+  ProtectedRoutes,
+  NavBar,
+};

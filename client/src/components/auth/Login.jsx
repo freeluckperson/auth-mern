@@ -13,7 +13,6 @@ const Login = () => {
   } = useForm();
 
   const { signin, loginErr, isAuthenticated } = useAuth();
-  console.log(loginErr);
 
   const onSubmit = handleSubmit(async (value) => {
     const response = await signin(value);
@@ -25,14 +24,14 @@ const Login = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div className="container text-center " style={{ maxWidth: "360px" }}>
+    <div className="container text-center" style={{ maxWidth: "360px" }}>
       {loginErr?.map((err, i) => (
         <label className="form-control " key={i}>
           {err}
         </label>
       ))}
       <form onSubmit={onSubmit}>
-        <h2 className="mt-5  ">Login</h2>
+        <h2 className="mt-5 ">Login</h2>
         <div className="mb-2">
           <input
             className="form-control"

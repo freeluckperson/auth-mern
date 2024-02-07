@@ -11,7 +11,7 @@ const Card = () => {
         <div key={task._id} className="col-md-4 mt-4">
           <div className="card h-100 ">
             <div className="card-body">
-              <h5 className="card-title"> {task.title}</h5>
+              <h5 className="card-title"> {task.title.substring(0, 25)}</h5>
               <h6 className="card-subtitle mt-2 text-body-tertiary ">
                 Description
               </h6>

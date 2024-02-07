@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTask } from "../context/TaskContext";
 
 const TaskForm = () => {
-  const { register, handleSubmit } = useForm();
+  const [showAlert, setShowAlert] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const { createTask } = useTask();
 
   const onSubmit = handleSubmit((data) => {
     createTask(data);
+    reset();
+    setShowAlert(true);
   });
 
   return (
@@ -43,6 +51,11 @@ const TaskForm = () => {
           Create Task
         </button>
       </form>
+      {showAlert && (
+        <div className="alert  alert-primary mt-2" role="alert">
+          Task created successfully
+        </div>
+      )}
     </div>
   );
 };
