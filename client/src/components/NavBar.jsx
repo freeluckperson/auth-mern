@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
+  const { isAuthenticated, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    signOut();
+    navigate("/login");
+  };
+
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand fw-bolder  ">TODO</Link>
+          <Link className="navbar-brand fw-bolder  ">
+            <img
+              src={logo}
+              style={{ maxHeight: "40px", maxWidth: "40px" }}
+              alt="..."
+            />
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -18,7 +34,7 @@ const NavBar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav me-auto mx-auto  mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link to="/" className="nav-link active" aria-current="page">
                   Home
@@ -29,50 +45,42 @@ const NavBar = () => {
                   Tasks
                 </Link>
               </li>
-              {/* <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li> */}
               <li className="nav-item">
                 <Link to="/add-task" className="nav-link" aria-current="page">
                   Create Tasks
                 </Link>
               </li>
             </ul>
-            <form className="d-flex" role="search">
-              <div className="btn btn-outline-dark ">
-                <Link to="/register" className="nav-link ">
-                  Register
-                </Link>
-              </div>
-            </form>
+            <div className="d-flex" role="search">
+              {isAuthenticated ? (
+                <>
+                  <div className="btn btn-outline-dark d-flex align-items-center  ">
+                    <Link to="/add-task" className="nav-link ">
+                      Add Task
+                    </Link>
+                  </div>
+                  <button
+                    onClick={handleClick}
+                    className="btn btn-outline-dark d-flex align-items-center ms-2 "
+                  >
+                    <div>Sign out</div>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <div className="btn btn-outline-dark d-flex align-items-center  ">
+                    <Link to="/register" className="nav-link ">
+                      Register
+                    </Link>
+                  </div>
+                  <div className="btn btn-outline-dark d-flex align-items-center ms-2 ">
+                    <Link to="/login" className="nav-link   ">
+                      Login
+                    </Link>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </nav>

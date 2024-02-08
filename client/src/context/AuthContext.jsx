@@ -1,7 +1,12 @@
 //Usamos context para almacenar el usuario en un estado
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { loginRequest, registerRequest, verifyTokenRequest } from "../api/auth";
+import {
+  loginRequest,
+  logoutRequest,
+  registerRequest,
+  verifyTokenRequest,
+} from "../api/auth";
 import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
@@ -36,6 +41,16 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(true);
     } catch (error) {
       setLoginErr(error.response.data);
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      const res = await logoutRequest();
+      console.log(res);
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.log("hola mundo");
     }
   };
 
@@ -79,6 +94,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         signup,
         signin,
+        signOut,
         user,
         isAuthenticated,
         registerErr,
