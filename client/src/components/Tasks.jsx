@@ -1,19 +1,26 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useTask } from "../context/TaskContext";
 
 const Card = () => {
-  const { tasks } = useTask();
-  console.log(tasks);
+  const { tasks, delTask, getTask } = useTask();
 
   return (
     <>
-      {tasks?.map((task) => (
-        <div key={task._id} className="col-md-4 mt-4">
+      {tasks?.map((task, i) => (
+        <div key={i} className="col-md-4 mt-4">
           <div className="card h-100 ">
             <div className="d-flex justify-content-end">
               <button className="btn btn-outline-dark  border-0 ">Edit</button>
 
-              <button className="btn btn-outline-dark border-0  ">X</button>
+              <button
+                className="btn btn-outline-dark border-0"
+                onClick={async () => {
+                  await delTask(task._id);
+                  await getTask();
+                }}
+              >
+                X
+              </button>
             </div>
             <div className="card-body">
               <h5 className="card-title"> {task.title.substring(0, 25)}</h5>
@@ -37,11 +44,13 @@ const Tasks = () => {
   }, []);
 
   return (
-    <div className="container-md  ">
-      <div className="row mt-5">
-        <Card />
+    <>
+      <div className="container-md  " style={{ marginBottom: "200px" }}>
+        <div className="row mt-5">
+          <Card />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

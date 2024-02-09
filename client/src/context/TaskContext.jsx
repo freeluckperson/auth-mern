@@ -27,8 +27,12 @@ export const TaskProvider = ({ children }) => {
     setTasks(res.data.tasks);
   };
 
+  const delTask = async (id) => {
+    await deleteTasksRequest(id);
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, createTask, getTask }}>
+    <TaskContext.Provider value={{ tasks, createTask, getTask, delTask }}>
       {children}
     </TaskContext.Provider>
   );

@@ -13,8 +13,8 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <div className="container-xxl ">
+      <nav className="navbar navbar-expand-sm ">
         <div className="container-fluid">
           <Link className="navbar-brand fw-bolder  ">
             <img
@@ -56,7 +56,7 @@ const NavBar = () => {
               {isAuthenticated ? (
                 <>
                   <div className="d-flex align-items-center me-2 fw-bolder text-secondary   ">
-                    Welcome {user.userName}
+                    {user.userName}
                   </div>
 
                   <div className="btn btn-outline-dark d-flex align-items-center  ">
