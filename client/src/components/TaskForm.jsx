@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTask } from "../context/TaskContext";
+import { useNavigate } from "react-router-dom";
 
 const TaskForm = () => {
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,6 +19,7 @@ const TaskForm = () => {
     createTask(data);
     reset();
     setShowAlert(true);
+    navigate("/tasks");
   });
 
   return (

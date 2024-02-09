@@ -10,6 +10,11 @@ const Card = () => {
       {tasks?.map((task) => (
         <div key={task._id} className="col-md-4 mt-4">
           <div className="card h-100 ">
+            <div className="d-flex justify-content-end">
+              <button className="btn btn-outline-dark  border-0 ">Edit</button>
+
+              <button className="btn btn-outline-dark border-0  ">X</button>
+            </div>
             <div className="card-body">
               <h5 className="card-title"> {task.title.substring(0, 25)}</h5>
               <h6 className="card-subtitle mt-2 text-body-tertiary ">
