@@ -3,7 +3,8 @@ import logo from "../assets/logo.png";
 import { useAuth } from "../context/AuthContext";
 
 const NavBar = () => {
-  const { isAuthenticated, signOut } = useAuth();
+  const { isAuthenticated, signOut, user } = useAuth();
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -54,11 +55,16 @@ const NavBar = () => {
             <div className="d-flex" role="search">
               {isAuthenticated ? (
                 <>
+                  <div className="d-flex align-items-center me-2 fw-bolder text-secondary   ">
+                    Welcome {user.userName}
+                  </div>
+
                   <div className="btn btn-outline-dark d-flex align-items-center  ">
                     <Link to="/add-task" className="nav-link ">
                       Add Task
                     </Link>
                   </div>
+
                   <button
                     onClick={handleClick}
                     className="btn btn-outline-dark d-flex align-items-center ms-2 "
@@ -73,6 +79,7 @@ const NavBar = () => {
                       Register
                     </Link>
                   </div>
+
                   <div className="btn btn-outline-dark d-flex align-items-center ms-2 ">
                     <Link to="/login" className="nav-link   ">
                       Login

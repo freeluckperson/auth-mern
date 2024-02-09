@@ -7,6 +7,7 @@ import TaskForm from "./TaskForm";
 import Tasks from "./Tasks";
 import ProtectedRoutes from "../ProtectedRoutes";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 export {
   Login,
@@ -18,4 +19,5 @@ export {
   Tasks,
   ProtectedRoutes,
   NavBar,
+  Footer,
 };

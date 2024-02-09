@@ -1,6 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { Home, Login, Logout, NavBar, Profile, Register, TaskForm, Tasks } from "./components";
+import {
+  Footer,
+  Home,
+  Login,
+  Logout,
+  NavBar,
+  Profile,
+  Register,
+  TaskForm,
+  Tasks,
+} from "./components";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { TaskProvider } from "./context/TaskContext";
@@ -10,7 +20,7 @@ const App = () => {
     <AuthProvider>
       <TaskProvider>
         <BrowserRouter>
-        <NavBar/>
+          <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
@@ -22,6 +32,7 @@ const App = () => {
               <Route path="/add-task" element={<TaskForm />} />
             </Route>
           </Routes>
+          <Footer />
         </BrowserRouter>
       </TaskProvider>
     </AuthProvider>
