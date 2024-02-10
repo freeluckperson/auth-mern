@@ -17,7 +17,7 @@ import { TaskProvider } from "./context/TaskContext";
 
 const App = () => {
   return (
-    <div >
+    <div>
       <AuthProvider>
         <TaskProvider>
           <BrowserRouter>
@@ -31,6 +31,7 @@ const App = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/tasks" element={<Tasks />} />
                 <Route path="/add-task" element={<TaskForm />} />
+                <Route path="/add-task/:id" element={<TaskForm />} />
               </Route>
             </Routes>
             <Footer />

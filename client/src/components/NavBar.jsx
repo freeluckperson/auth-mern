@@ -13,7 +13,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container-xxl ">
+    <div className="container ">
       <nav className="navbar navbar-expand-sm ">
         <div className="container-fluid">
           <Link className="navbar-brand fw-bolder  ">

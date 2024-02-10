@@ -1,8 +1,18 @@
 import { useEffect } from "react";
 import { useTask } from "../context/TaskContext";
+import { Link } from "react-router-dom";
 
 const Card = () => {
   const { tasks, delTask, getTask } = useTask();
+
+  const handleDelete = (id) => async () => {
+    try {
+      await delTask(id);
+      await getTask();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
@@ -10,14 +20,16 @@ const Card = () => {
         <div key={i} className="col-md-4 mt-4">
           <div className="card h-100 ">
             <div className="d-flex justify-content-end">
-              <button className="btn btn-outline-dark  border-0 ">Edit</button>
+              <Link
+                className="btn btn-outline-dark  border-0"
+                to={`/add-task/${task._id}`}
+              >
+                Edit
+              </Link>
 
               <button
                 className="btn btn-outline-dark border-0"
-                onClick={async () => {
-                  await delTask(task._id);
-                  await getTask();
-                }}
+                onClick={handleDelete(task._id)}
               >
                 X
               </button>

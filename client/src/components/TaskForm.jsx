@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTask } from "../context/TaskContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const TaskForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const { createTask } = useTask();
+  const { createTask, getTaskById } = useTask();
 
   const onSubmit = handleSubmit((data) => {
     createTask(data);
@@ -21,6 +24,19 @@ const TaskForm = () => {
     setShowAlert(true);
     navigate("/tasks");
   });
+
+  useEffect(() => {
+    async function fechData() {
+      if (params.id) {
+        const res = await getTaskById(params.id);
+        console.log(res);
+        setValue("title", res.title);
+        setValue("description", res.description);
+        setValue("completed", res.completed);
+      }
+    }
+    fechData();
+  }, []);
 
   return (
     <div className="container text-center" style={{ maxWidth: "360px" }}>
@@ -33,6 +49,9 @@ const TaskForm = () => {
             {...register("title", { required: true })}
             placeholder="Enter a title"
           />
+          {errors.title && (
+            <p className="text-decoration-underline ">Title is required</p>
+          )}
         </div>
         <div className="mb-2">
           <textarea
@@ -40,6 +59,9 @@ const TaskForm = () => {
             {...register("description", { required: true })}
             placeholder="Enter a description"
           />
+          {errors.description && (
+            <p className="text-decoration-underline ">Title is required</p>
+          )}
         </div>
         <div className="mb-2">
           <input
