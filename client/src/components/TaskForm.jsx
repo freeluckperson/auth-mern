@@ -16,12 +16,14 @@ const TaskForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { createTask, getTaskById } = useTask();
+  const { createTask, getTaskById, updateTask } = useTask();
 
-  const onSubmit = handleSubmit((data) => {
-    createTask(data);
-    reset();
-    setShowAlert(true);
+  const onSubmit = handleSubmit((task) => {
+    console.log(task);
+    params.id
+      ? updateTask(task, params.id)
+      : (createTask(task), reset(), setShowAlert(true));
+
     navigate("/tasks");
   });
 
@@ -29,7 +31,6 @@ const TaskForm = () => {
     async function fechData() {
       if (params.id) {
         const res = await getTaskById(params.id);
-        console.log(res);
         setValue("title", res.title);
         setValue("description", res.description);
         setValue("completed", res.completed);
