@@ -1,15 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import {
-  Footer,
-  Home,
-  Login,
-  Logout,
-  NavBar,
-  Profile,
-  Register,
-  TaskForm,
-  Tasks,
+import { Footer, Home, Login, Logout, NavBar, Profile, Register, TaskForm, Tasks,
 } from "./components";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoutes from "./ProtectedRoutes";

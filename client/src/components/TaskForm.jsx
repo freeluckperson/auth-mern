@@ -19,7 +19,6 @@ const TaskForm = () => {
   const { createTask, getTaskById, updateTask } = useTask();
 
   const onSubmit = handleSubmit((task) => {
-    console.log(task);
     params.id
       ? updateTask(task, params.id)
       : (createTask(task), reset(), setShowAlert(true));
@@ -28,15 +27,12 @@ const TaskForm = () => {
   });
 
   useEffect(() => {
-    async function fechData() {
-      if (params.id) {
-        const res = await getTaskById(params.id);
-        setValue("title", res.title);
-        setValue("description", res.description);
-        setValue("completed", res.completed);
-      }
-    }
-    fechData();
+    params.id &&
+      getTaskById(params.id).then((response) => {
+        setValue("title", response.title);
+        setValue("description", response.description);
+        setValue("completed", response.completed);
+      });
   }, []);
 
   return (
@@ -47,11 +43,13 @@ const TaskForm = () => {
           <input
             className="form-control"
             type="text"
-            {...register("title", { required: true })}
+            {...register("title", { required: true, maxLength: 25 })}
             placeholder="Enter a title"
           />
           {errors.title && (
-            <p className="text-decoration-underline ">Title is required</p>
+            <p className="text-decoration-underline ">
+              Title is required (Max 25 characteres)
+            </p>
           )}
         </div>
         <div className="mb-2">
