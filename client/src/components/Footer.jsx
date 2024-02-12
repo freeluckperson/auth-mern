@@ -9,7 +9,7 @@ const Footer = () => {
             For contacts please visit my{" "}
             <a
               className="text-decoration-none link-offset-3-hover  "
-              href="https://freeluckperson.github.io/my-web-gh-pages/"
+              href="https://freeluckperson.github.io/my-web-gh-pages/" target="_blank" rel="noreferrer"
             >
               website
             </a>
