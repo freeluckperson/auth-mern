@@ -7,7 +7,15 @@ import authRoutes from "./routes/auth.routes.js";
 import taskRoutes from "./routes/task.routes.js";
 
 //Middlewares
-app.use(cors({ origin: "*", credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://server-express-docker.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
