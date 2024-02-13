@@ -10,8 +10,9 @@ import taskRoutes from "./routes/task.routes.js";
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
       "https://server-express-docker.onrender.com",
+      "https://server-express-docker.onrender.com/api",
+      "http://localhost:5173",
     ],
     credentials: true,
   })
@@ -24,4 +25,4 @@ app.use(cookieParser());
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
 
-// MIN 4:24:00 https://youtu.be/NmkY4JgS21A?si=y6_2S0DW_diZA2jF
+
